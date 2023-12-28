@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "telegram-lambda"
+version = "0.1.0"
+description = "telegram-lambda serverless function"
+authors = ["Jose Salcido <jmsalcidoaguilar@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-telegram-bot = "^20.7"
+pyjwt = "^2.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

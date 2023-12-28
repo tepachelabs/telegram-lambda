@@ -1,0 +1,22 @@
+service: telegram-lambda
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.10
+
+plugins:
+  - serverless-python-requirements
+
+functions:
+  call:
+    handler: handler.call
+    events:
+      - http:
+          path: message
+          method: post
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    usePoetry: true
