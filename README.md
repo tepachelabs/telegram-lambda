@@ -27,10 +27,16 @@ Remember to run:
 poetry export -f requirements.txt --output requirements.txt
 ```
 
-and run `sls deploy` to deploy the lambda.
+if there is any new secret in doppler run:
+
+```shell
+doppler secrets substitute serverless.yaml.template > serverless.yaml
+```
+
+and run `doppler run -- sls deploy` to deploy the lambda.
 
 ## Environment Variables
-Those are set in the lambda right now manually.
+Setup in Doppler
 
 ## How to use?
-Create a JWT token with the correct claim (see environment variables) and you will be able to send telegram messages to the given chat id.
+Create a JWT token with the correct claim for `app` (see Doppler apps) and you will be able to send telegram messages to the tepache group or the given chat id.

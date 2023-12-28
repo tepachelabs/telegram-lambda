@@ -7,6 +7,7 @@ provider:
 
 plugins:
   - serverless-python-requirements
+  - serverless-doppler
 
 functions:
   call:
@@ -15,6 +16,8 @@ functions:
       - http:
           path: message
           method: post
+    environment: {{ range $n, $v := . }}
+        {{$n}}: ${env:{{$n}}}{{end}}
 
 custom:
   pythonRequirements:

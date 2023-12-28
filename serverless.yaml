@@ -1,0 +1,31 @@
+service: telegram-lambda
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.10
+
+plugins:
+  - serverless-python-requirements
+  - serverless-doppler
+
+functions:
+  call:
+    handler: handler.call
+    events:
+      - http:
+          path: message
+          method: post
+    environment: 
+        CHAT_ID: ${env:CHAT_ID}
+        DOPPLER_CONFIG: ${env:DOPPLER_CONFIG}
+        DOPPLER_ENVIRONMENT: ${env:DOPPLER_ENVIRONMENT}
+        DOPPLER_PROJECT: ${env:DOPPLER_PROJECT}
+        JWT_SECRET: ${env:JWT_SECRET}
+        TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+        TEPACHE_APPS: ${env:TEPACHE_APPS}
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    usePoetry: true
