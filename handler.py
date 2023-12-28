@@ -10,6 +10,13 @@ from telegram.constants import ParseMode
 logger = logging.getLogger(__name__)
 
 
+def _escape_telegram_text(text):
+    special_characters = ['*', '_', '[', ']', '(', ')', '~', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!']
+    for character in special_characters:
+        text = text.replace(character, '\\' + character)
+    return text
+
+
 async def send_message_in_tepache_chat(event, _context, message) -> None:
     token = os.environ.get("TELEGRAM_TOKEN", None)
 
@@ -70,7 +77,7 @@ def call(event, context):
             }
 
         # async call
-        asyncio.run(send_message_in_tepache_chat(event, context, message))
+        asyncio.run(send_message_in_tepache_chat(event, context, _escape_telegram_text(message)))
 
         return {
             'statusCode': 200,
